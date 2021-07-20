@@ -1,6 +1,14 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer') //分析插件，打包后在build/static/report.html中展示各模块所占的大小
 
-const { override, addPostcssPlugins, addWebpackAlias, fixBabelImports, addWebpackPlugin } = require('customize-cra')
+const {
+  override,
+  addPostcssPlugins,
+  addWebpackAlias,
+  fixBabelImports,
+  addWebpackPlugin,
+  overrideDevServer,
+  addLessLoader
+} = require('customize-cra')
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
@@ -9,16 +17,35 @@ process.env.GENERATE_SOURCEMAP = 'false'
 
 const analyze = process.env.REACT_APP_ENV === 'production' //是否分析打包数据
 
-module.exports = override(
-  /**
+const addProxy = () => (configFunction) => {
+  return {
+    ...configFunction,
+    proxy: {
+      '/workflow/api/**': {
+        target: 'https://test-workflow.inkept.cn/',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
+}
+module.exports = {
+  webpack: override(
+    addLessLoader({
+      lessOptions: {
+        javascriptEnabled: true,
+        localIdentName: '[local]--[hash:base64:5]'
+      }
+    }),
+    /**
    * 假如设计图给的宽度是750，remUnit设置为75，这样我们写样式时，可以直接按照设计图标注的宽高来1:1还原开发。
    * PS: 如果引用了某些没有兼容px2rem第三方UI框架，有的 1rem = 100px（antd-mobile）， 有的 1rem = 75px，
    * 需要将remUnit的值设置为像素对应的一半（这里我们用的antd-mobile，所以设置为50），即可以1:1还原组件。
    */
-  addPostcssPlugins([require('postcss-px2rem')({ remUnit: 50 })]),
+  addPostcssPlugins([require('postcss-px2rem')({ remUnit: 37.5, exclude: /node-modules/i })]),
   /* 别名设置 */
   addWebpackAlias({
-    '@/': resolve('src'),
+    '@/src': resolve('src'),
     '@/components': resolve('./src/components'),
     '@/utils': resolve('./src/utils'),
     '@/pages': resolve('./src/pages'),
@@ -31,7 +58,7 @@ module.exports = override(
     '@/constants': resolve('./src/constants'),
     '@/config': resolve('./src/config')
   }),
-  /* 按需引入antd-mobile */
+  /* 按需引入antd-mobile */ 
   fixBabelImports('import', {
     libraryName: 'antd-mobile',
     style: 'css'
@@ -43,4 +70,8 @@ module.exports = override(
         })
       )
     : undefined
-)
+  ),
+  devServer: overrideDevServer(
+    addProxy()
+  )
+}
