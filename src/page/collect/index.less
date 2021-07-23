@@ -1,0 +1,101 @@
+.collect-wrapper {
+  .collect-top {
+    position: relative;
+    width: 100vw;
+    height: 275px;
+    background: linear-gradient(-51deg, #FF6969 0%, #FA4530 100%);
+    .collect-top-vip-wrapper {
+      position: absolute;
+      top: 46px;
+      left: 20px;
+    }
+    .collect-vip-icon {
+      width: 24px;
+      height: 22px;
+      display: inline-block;
+      background: url('../../assets/huiyuan.png') no-repeat;
+      background-position: center;
+      background-size: contain;
+      vertical-align: middle;
+    }
+    .collect-vip-num {
+      font-size: 12px;
+      font-family: PingFang;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 20px;
+      margin-left: 4px;
+    }
+    .collect-title {
+      font-size: 21px;
+      font-family: PingFang;
+      font-weight: bold;
+      color: #FFFFFF;
+      line-height: 20px;
+      text-align: center;
+      position: relative;
+      top: 104px;
+    }
+    .collect-search-wrapper {
+      position: relative;
+      width: 340px;
+      height: 45px;
+      background: #FFFFFF;
+      border-radius: 23px;
+      margin: 0 auto;
+      top: 151px;
+      .collect-search-icon {
+        position: absolute;
+        left: 40.5px;
+        top: 15.5px;
+        bottom: 17.5px;
+        width: 13px;
+        height: 14px;
+        display: inline-block;
+        background: url('../../assets/search-icon.png') no-repeat;
+        background-position: center;
+        background-size: contain;
+        vertical-align: middle;
+      }
+      .collect-search-input {
+        position: absolute;
+        display: inline-block;
+        height: 35px;
+        width: 250px;
+        border-radius: 23px;
+        top: 5px;
+        left: 60px;
+        border: none;
+      }
+      input:focus{outline:none;}
+    }
+  }
+  .collect-content {
+    position: relative;
+    width: 100vw;
+    min-height: 400px;
+    background: #FFFFFF;
+    border-radius: 18px 18px 0px 0px;
+    top: -15px;
+    .collect-content-title {
+      position: absolute;
+      padding: 12px 0 0 14px;
+      font-size: 12px;
+      font-family: PingFang;
+      font-weight: 500;
+      color: #2A2B2D;
+      line-height: 20px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 2px;
+        height: 12px;
+        background: #FB4E3F;
+        border-radius: 1px;
+        margin-right: 3px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}

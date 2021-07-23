@@ -1,6 +1,14 @@
+body {
+  -webkit-text-size-adjust: none;
+}
+ul, li {
+  padding: 0;
+  margin: 0;
+}
 .App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;

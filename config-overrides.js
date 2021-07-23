@@ -7,7 +7,8 @@ const {
   fixBabelImports,
   addWebpackPlugin,
   overrideDevServer,
-  addLessLoader
+  addLessLoader,
+  adjustStyleLoaders
 } = require('customize-cra')
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
@@ -31,6 +32,13 @@ const addProxy = () => (configFunction) => {
 }
 module.exports = {
   webpack: override(
+    adjustStyleLoaders(({ use: [ , css, postcss, resolve ] }) => {
+      css.options.sourceMap = true; // css-loader
+      postcss.options.sourceMap = true;
+      if (resolve) {
+        resolve.options.sourceMap = true
+      }
+    }),
     addLessLoader({
       lessOptions: {
         javascriptEnabled: true,
@@ -42,7 +50,7 @@ module.exports = {
    * PS: 如果引用了某些没有兼容px2rem第三方UI框架，有的 1rem = 100px（antd-mobile）， 有的 1rem = 75px，
    * 需要将remUnit的值设置为像素对应的一半（这里我们用的antd-mobile，所以设置为50），即可以1:1还原组件。
    */
-  addPostcssPlugins([require('postcss-px2rem')({ remUnit: 37.5, exclude: /node-modules/i })]),
+  addPostcssPlugins([require('postcss-px2rem')({ remUnit: 18.75, exclude: /node-modules/i })]),
   /* 别名设置 */
   addWebpackAlias({
     '@/src': resolve('src'),
