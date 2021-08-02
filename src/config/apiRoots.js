@@ -8,13 +8,13 @@ export const HOST_ENV = [HOST_BETA, HOST_ONLINE, HOST_TEST].find(key => HOST.ind
 
 export const prodRootMap = {
   [HOST_ONLINE]: {
-    root: '//baseapi.busi.inke.cn/',
+    root: '//sudaxia.vip:8009/',
   },
   [HOST_BETA]: {
-    root: '//betabaseapi.busi.inke.cn/',
+    root: '',
   },
   [HOST_TEST]: {
-    root: '//testbaseapi.busi.inke.cn/',
+    root: '',
   }
 }
 

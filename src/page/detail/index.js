@@ -1,74 +1,130 @@
 import React, { useEffect, useState } from 'react'
 import List from './components/list'
+import { Toast } from 'antd-mobile';
+import { useHistory } from 'react-router-dom'
 import './index.less'
-import test from '@/assets/chanpin.png'
+import API from './apis'
+import $common from '@/utils'
 
 const Detail = () => {
   const [data, setData] = useState([])
   const [selectActive, setSelectActive] = useState(0)
   const [siteData, setSiteData] = useState([])
   const [activeSite, setActiveSite] = useState(0)
+  const [dataSource, setDataSource] = useState({})
+  const [listData, setListData] = useState([])
+  const history = useHistory()
   useEffect(() => {
-    const arr = new Array(10).fill('')
-    setData(arr)
-    setSiteData([{
-      name: '全网',
-      price: 200,
-    }, {
-      name: '京东',
-      price: 189,
-    }, {
-      name: '天猫',
-      price: 299,
-    }])
+    getDetail()
+    getComparePrice()
   }, [])
+
+  // 请求详情接口
+  const getDetail = () => {
+    API.getDetail({
+      stid: $common.getUrlQuery('stid'),
+      reid: $common.getUrlQuery('reid')
+    }).then(res => {
+      setDataSource(res.data ? res.data : {})
+      setData(res.data.relations ? res.data.relations : [])
+    }).catch(err => {
+      Toast.fail(err.error_msg, 1);
+    })
+  }
+
+  // 获取比价列表
+  const getComparePrice = () => {
+    API.getComparePrice({
+      stid: $common.getUrlQuery('stid'),
+      reid: $common.getUrlQuery('reid'),
+      page: 1
+    }).then(res => {
+      setSiteData(res.data.comparelist_data ? res.data.comparelist_data : [])
+      setListData(res.data.product_group_list ? res.data.product_group_list : [])
+    }).catch(err => {
+      Toast.fail(err.error_msg, 1);
+    })
+  }
+
+  // 加入梳妆台
+  const addDressingTable = () => {
+    API.addDressingTable({
+      stid: $common.getUrlQuery('stid'),
+      reid: $common.getUrlQuery('reid'),
+    }).then(res => {
+      Toast.success('添加成功', 1);
+    }).catch(err => {
+      Toast.fail(err.error_msg, 1);
+    })
+  }
+
+  // 移除梳妆台
+  const removeDressingTable = () => {
+    API.removeDressingTable({
+      stid: $common.getUrlQuery('stid'),
+      reid: $common.getUrlQuery('reid'),
+    }).then(res => {
+      Toast.success('移除成功', 1);
+    }).catch(err => {
+      Toast.fail(err.error_msg, 1);
+    })
+  }
+
+  // 返回
+  const goBack = () => {
+    history.go(-1)
+  }
+
   const choiceItem = (id) => {
     setSelectActive(id)
   }
 
-  const choiceSite = (index) => {
+  const choiceSite = (index, value) => {
     setActiveSite(index)
+    console.log(value)
   }
 
   return <div className='detail-wrapper'>
-    <div className='detail-top'>
-      <div className='detail-back'></div>
-      <div className='detail-show-img-wrapper'>
-        <img className='detail-show-img' alt='' src={test} />
-        <div className='detail-show-text'>Origins/悦目之源 菌菇水 韦博士灵芝焕能精华水 200ml</div>
-      </div>
-      <div className='detail-list'>
-        {
-          data.map((item, i) => {
-            return <div className={ selectActive === i ? 'detail-list-item item-active' : 'detail-list-item'} key={i} onClick={choiceItem.bind(this, i)}>
-              <div className='detail-list-img-wrapper'>
-                <img className='detail-list-item-img' src={test} alt='' />
+    <div className='detail-wrapper-top'>
+      <div className='detail-top'>
+        <div className='detail-back' onClick={goBack}></div>
+        <div className='detail-show-img-wrapper'>
+          <img className='detail-show-img' alt='' src={dataSource.pic} />
+          <div className='detail-show-text'>{dataSource.title}</div>
+        </div>
+        <div className='detail-list'>
+          {
+            data.map((item, i) => {
+              return <div className={ selectActive === i ? 'detail-list-item item-active' : 'detail-list-item'} key={i} onClick={choiceItem.bind(this, i)}>
+                <div className='detail-list-img-wrapper'>
+                  <img className='detail-list-item-img' src={item.pic} alt='' />
+                </div>
+                <div className={selectActive === i ? 'detail-list-item-model' : 'detail-list-item-model item-model-color'}>{item.relation_name}</div>
+                <div className={selectActive === i ? 'detail-list-item-text' : 'detail-list-item-text item-text-color'}>{item.name}</div>
+                <div className='detail-list-item-price'>
+                  <label>￥{item.price_min}</label>
+                  <label>起</label>
+                </div>
               </div>
-              <div className={selectActive === i ? 'detail-list-item-model' : 'detail-list-item-model item-model-color'}>#999</div>
-              <div className={selectActive === i ? 'detail-list-item-text' : 'detail-list-item-text item-text-color'}>新款哑光</div>
-              <div className='detail-list-item-price'>
-                <label>￥88</label>
-                <label>起</label>
-              </div>
+            })
+          }
+        </div>
+        <div className='detai-price-site'>
+          {
+            siteData.map((item, i) => {
+              return <div className={activeSite === i ? 'detail-price-item detail-price-item-active' : 'detail-price-item'} key={i} onClick={choiceSite.bind(this, i, item.value)}>
+              <span>{item.name}</span>
+              <span>￥{item.price}</span>
             </div>
-          })
-        }
+            })
+          }
+        </div>
       </div>
-      <div className='detai-price-site'>
-        {
-          siteData.map((item, i) => {
-            return <div className={activeSite === i ? 'detail-price-item detail-price-item-active' : 'detail-price-item'} key={i} onClick={choiceSite.bind(this, i)}>
-            <span>{item.name}</span>
-            <span>￥{item.price}</span>
-          </div>
-          })
-        }
-      </div>
+      <List listData={listData}></List>
     </div>
-    <List></List>
     <div className='detail-bottom'>
-      <span>加入梳妆台</span>
-      <span>从梳妆台移除</span>
+      <span onClick={addDressingTable}>加入梳妆台</span>
+      <span onClick={removeDressingTable}>从梳妆台移除</span>
     </div>
   </div>
 }

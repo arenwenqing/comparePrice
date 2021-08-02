@@ -9,6 +9,9 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
+          <Route exact path='/'>
+            <Collect></Collect>
+          </Route>
           <Route exact path='/collect'>
             <Collect></Collect>
           </Route>

@@ -3,10 +3,7 @@ import axiosService from 'axios-service'
 
 const setTicketToHeader = config => {
   const { headers } = config;
-  if (window.localStorage.getItem('mail')) {
-    headers.mail = 'wangyl@inke.cn'
-    headers['Auth-Type'] = 'custom'
-  }
+  headers.Authorization = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6MTMwNTEwMjg5MjgsImV4cCI6MTYyNzkxOTQ2NX0.qjNVH0B7sUg8O5thSCossGU24ievYUNW5Xc_BFx2hZc'
 };
 
 const setTicketToParams = config => {

@@ -1,4 +1,8 @@
 .detail-wrapper {
+  .detail-wrapper-top {
+    height: calc(100vh - 88px);
+    overflow: auto;
+  }
   .detail-top {
     width: 100vw;
     height: 443px;
@@ -31,7 +35,7 @@
       color: #1C1C1C;
       line-height: 23px;
       margin: 13px auto 22px;
-      text-align: left;
+      text-align: center;
     }
     .detail-list {
       list-style: none;;
@@ -49,6 +53,7 @@
       border-radius: 6px;
       margin-right: 11px;
       color: #FF0026;
+      overflow: hidden;
     }
     .item-active {
       border: 1px solid #FF0026;
@@ -59,6 +64,7 @@
     .detail-list-img-wrapper {
       height: 60px;
       text-align: center;
+      margin-top: 5px;
     }
     .detail-list-item-img {
       width: 36px;
@@ -69,12 +75,12 @@
     .detail-list-item-text {
       display: inline-block;
       text-align: center;
-      width: 100px;
+      width: 170px;
       font-size: 20px;
       transform: scale(0.5);
       position: relative;
-      top: -24px;
-      left: -20px;
+      top: -22px;
+      left: -55px;
       overflow: hidden;
       text-overflow:ellipsis;
       white-space: nowrap;
@@ -84,6 +90,12 @@
       transform: scale(0.5);
       position: relative;
       top: -13px;
+      width: 170px;
+      left: -55px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .item-model-color, .item-text-color {
       color: #1c1c1c;
@@ -91,10 +103,11 @@
     .detail-list-item-price {
       transform: scale(0.8);
       position: relative;
-      top: -37px;
+      top: -30px;
       overflow: hidden;
       text-overflow:ellipsis;
       white-space: nowrap;
+      text-align: center;
       label:nth-child(2) {
         display: inline-block;
         transform: scale(0.7);
