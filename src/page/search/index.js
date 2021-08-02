@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NoSearch from './components/noSearch'
 import HaveSearch from '../components/list'
 import { Toast } from 'antd-mobile';
@@ -8,6 +8,7 @@ import API from './apis'
 let currentInput = ''
 const Search = () => {
   const [showSearchResult, setShowSearchResult] = useState([])
+  const [flag, setFlag] = useState(false)
   const inputChange = (e) => {
     currentInput = e.target.value.trim()
   }
