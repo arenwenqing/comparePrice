@@ -1,56 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.less'
-import test from '@/assets/test.png'
-const HaveCollect = () => {
+const HaveCollect = (props) => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    if (props.result && props.result.length) {
+      setData(props.result)
+    }
+  }, [props.result])
   return <div className='have-collect-wrapepr'>
-    <div className='collect-item'>
-      <img src={test} alt='' />
-      <span className='collect-text'>Shiseido/资生堂 INTEGRAT完美意境保湿粉底</span>
-      <span className='collect-text-tip'>#OC20自然肤色（适合肤色</span>
-      <span className='collect-text-bottom'>
-        <label className='collect-text-price'>
-          <label>￥</label>
-          <label>88</label>
-          <label>起</label>
-        </label>
-        <label className='collect-text-num'>
-          <label>10</label>
-          <label>个店铺在售</label>
-        </label>
-      </span>
-    </div>
-    <div className='collect-item'>
-      <img src={test} alt='' />
-      <span className='collect-text'>Shiseido/资生堂 INTEGRAT完美意境保湿粉底</span>
-      <span className='collect-text-tip'>#OC20自然肤色（适合肤色</span>
-      <span className='collect-text-bottom'>
-        <label className='collect-text-price'>
-          <label>￥</label>
-          <label>88</label>
-          <label>起</label>
-        </label>
-        <label className='collect-text-num'>
-          <label>10</label>
-          <label>个店铺在售</label>
-        </label>
-      </span>
-    </div>
-    <div className='collect-item'>
-      <img src={test} alt='' />
-      <span className='collect-text'>Shiseido/资生堂 INTEGRAT完美意境保湿粉底</span>
-      <span className='collect-text-tip'>#OC20自然肤色（适合肤色</span>
-      <span className='collect-text-bottom'>
-        <label className='collect-text-price'>
-          <label>￥</label>
-          <label>88</label>
-          <label>起</label>
-        </label>
-        <label className='collect-text-num'>
-          <label>10</label>
-          <label>个店铺在售</label>
-        </label>
-      </span>
-    </div>
+    {
+      data.map((item, i) => {
+        return <div className='collect-item' key={i}>
+        <img src={item.standard.pic} alt={item.standard.title} />
+        <span className='collect-text'>{item.standard.title}</span>
+        <span className='collect-text-tip'>{item.standard.props.toString()}</span>
+        <span className='collect-text-bottom'>
+          <label className='collect-text-price'>
+            <label>￥</label>
+            <label>{item.standard.price_min}</label>
+            <label>起</label>
+          </label>
+          <label className='collect-text-num'>
+            <label>{item.standard.item_count}</label>
+            <label>个店铺在售</label>
+          </label>
+        </span>
+      </div>
+      })
+    }
   </div>
 }
 export default HaveCollect

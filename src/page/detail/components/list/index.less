@@ -1,0 +1,89 @@
+.detail-list {
+  margin-top: 26px;
+  .detail-list-item {
+    height: 115px;
+    background: #fff;
+    padding: 0px 12px;
+  }
+  .detail-list-driver {
+    background: #F9F9F9;
+    height: 5px;
+  }
+  .detail-list-item-price {
+    text-align: right;
+    font-family: PingFang;
+    font-weight: 800;
+    color: #FF2326;
+    line-height: 16px;
+    position: relative;
+    top: -8px;
+    span:nth-child(1) {
+      font-size: 14px;
+    }
+    span:nth-child(2) {
+      font-size: 22px;
+    }
+  }
+  .detail-list-item-li {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    align-items: center;
+    margin-bottom: 17px;
+  }
+  .detail-list-item-name {
+    display: inline-block;
+    width: 240px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    font-family: PingFang;
+    font-weight: 500;
+    color: #080808;
+    line-height: 16px;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 31px;
+      height: 16px;
+      background: url('../../../../assets/tm.png') no-repeat;
+      background-position: center;
+      background-size: contain;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+  .detail-list-item-pirce-text {
+    position: relative;
+    background: #FFF5F5;
+    border: 1px solid #FF0026;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: PingFang;
+    font-weight: 500;
+    color: #FF0026;
+    display: inline-block;
+    transform: scale(0.5);
+    text-align: center;
+    padding: 0px 15px;
+    left: 41px;
+  }
+  .detail-list-item-rate {
+    display: flex;
+    justify-content: space-between;
+  }
+  .detail-list-item-buy {
+    width: 70px;
+    height: 23px;
+    background: linear-gradient(90deg, #FF5047, #FF1A1A);
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: PingFang;
+    font-weight: 500;
+    color: #FEFEFE;
+    line-height: 23px;
+    text-align: center;
+  }
+}

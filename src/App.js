@@ -2,6 +2,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Collect from './page/collect'
 import Search from './page/search'
 import Detail from './page/detail'
+import Login from './page/login'
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route exact path='/detail'>
             <Detail></Detail>
+          </Route>
+          <Route exact path='/login'>
+            <Login></Login>
           </Route>
         </Switch>
       </div>

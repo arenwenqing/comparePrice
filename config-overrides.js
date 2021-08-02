@@ -22,8 +22,8 @@ const addProxy = () => (configFunction) => {
   return {
     ...configFunction,
     proxy: {
-      '/workflow/api/**': {
-        target: 'https://test-workflow.inkept.cn/',
+      '/api/**': {
+        target: 'http://sudaxia.vip:8009/',
         changeOrigin: true,
         secure: false
       }
@@ -54,7 +54,7 @@ module.exports = {
   /* 别名设置 */
   addWebpackAlias({
     '@/src': resolve('src'),
-    '@/components': resolve('./src/components'),
+    '@/components': resolve('./src/page/components'),
     '@/utils': resolve('./src/utils'),
     '@/pages': resolve('./src/pages'),
     '@/store': resolve('./src/store'),
