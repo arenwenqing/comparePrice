@@ -96,9 +96,10 @@ const Login = (props, ref) => {
       sms_code: smsCode * 1,
       ...(invitationCode ? { invite_code: invitationCode } : {})
     }).then(res => {
-      console.log(res)
+      window.localStorage.setItem('tokenKey', `${res.token_type} ${res.access_token}`)
       Toast.success('登录成功', 1)
       setIfShowLogin(false)
+      window.location.reload()
     }).catch(err => {
       Toast.fail(err.error_msg, 1)
     })

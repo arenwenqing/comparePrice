@@ -10,6 +10,7 @@ import './index.less'
 const Collect = () => {
   const [dataList, setDataList] = useState([])
   const [showLogin, setShowLogin] = useState(false)
+  const [useData, setUseData] = useState({})
   // const [flag, setFlag] = useState(false)
   const loginRef = useRef()
   const history = useHistory()
@@ -21,7 +22,7 @@ const Collect = () => {
   // 校验用户
   const getUser = () => {
     API.getUser({}).then(res => {
-      console.log(res)
+      setUseData(res.data)
     }).catch(err => {
       if (err.code === 1005) {
         setShowLogin(true)
@@ -68,9 +69,11 @@ const Collect = () => {
     <Login ref={loginRef}></Login>
     <div className='collect-top'>
       <div className='collect-top-vip-wrapper'>
-        <span className='collect-vip-icon'></span>
         {
-          showLogin ? <span className='collect-vip-num' onClick={login}>请登录</span> : <span className='collect-vip-num'>135****6666</span>
+          useData.is_vip ? <span className='collect-vip-icon'></span> : ''
+        }
+        {
+          showLogin ? <span className='collect-vip-num' onClick={login}>点击登录</span> : <span className='collect-vip-num'>{useData.phone}</span>
         }
       </div>
       <div className='collect-title'>买化妆品，先找苏大侠比价</div>
@@ -81,9 +84,11 @@ const Collect = () => {
     </div>
     <div className='collect-content'>
       <div className='collect-content-title'>我的梳妆台</div>
-      {
-        dataList.length ? <HaveCollect result={dataList}></HaveCollect> : <NoCollect></NoCollect>
-      }
+      <div className='collect-content-list-wrapper'>
+        {
+          dataList.length ? <HaveCollect result={dataList}></HaveCollect> : <NoCollect></NoCollect>
+        }
+      </div>
     </div>
   </div>
 }

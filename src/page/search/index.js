@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NoSearch from './components/noSearch'
+import { useHistory } from 'react-router-dom'
 import HaveSearch from '../components/list'
 import { Toast } from 'antd-mobile';
 import $common from '@/utils'
@@ -11,6 +12,7 @@ const Search = () => {
   const [showSearchResult, setShowSearchResult] = useState([])
   // const [flag, setFlag] = useState(false)
   const [searchValue, setSearchValue] = useState(undefined)
+  const history = useHistory()
   const inputChange = (e) => {
     currentInput = e.target.value.trim()
     setSearchValue(currentInput)
@@ -43,8 +45,12 @@ const Search = () => {
 
   return <div className='search-wrapper'>
     <div className='search-top'>
-      <span className='search-back'></span>
-      <input type='text' className='search-input' value={searchValue} onChange={inputChange} onKeyDown={keypress}></input>
+      <span className='search-back' onClick={() => {
+       history.push({
+         pathname: '/collect'
+       })
+      }}></span>
+      <input type='text' className='search-input' placeholder='搜索你想买的化妆品，查看全网底价' value={searchValue} onChange={inputChange} onKeyDown={keypress}></input>
     </div>
     <div className='search-driver'></div>
     {

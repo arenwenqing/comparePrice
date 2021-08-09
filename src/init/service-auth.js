@@ -3,7 +3,7 @@ import axiosService from 'axios-service'
 
 const setTicketToHeader = config => {
   const { headers } = config;
-  headers.Authorization = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6MTMwNTEwMjg5MjgsImV4cCI6MTYzMDU1MTAxMH0.1ayTtHgb77Tt_BMdjODkv2-R4189xcjLiYMD5zZLyyM'
+  headers.Authorization = window.localStorage.getItem('tokenKey')
 };
 
 const setTicketToParams = config => {

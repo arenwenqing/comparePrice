@@ -23,7 +23,7 @@ const List = (props) => {
           <div className='detail-list-item-li'>
             <span className='detail-list-item-name'>
               <i className={iconMap[item.platform_id]}></i>
-              <label>{item.title}</label>
+              <label>{item.shop_info.shop_name}</label>
             </span>
             <span className='detail-list-item-pirce-text'>
               {item.return_type_name}
@@ -34,7 +34,10 @@ const List = (props) => {
             <span>{item.final_price}</span>
           </div>
           <div className='detail-list-item-rate'>
-            <span></span>
+            {
+              (item.shop_info.shop_type_name && item.platform_id !== 1) ? <span className='detail-shop-info'>{item.shop_info.shop_type_name}</span> : <span></span>
+            }
+            
             <span className='detail-list-item-buy'>去购买</span>
           </div>
         </div>

@@ -14,10 +14,11 @@ const Detail = () => {
   const [activeSite, setActiveSite] = useState(0)
   const [dataSource, setDataSource] = useState({})
   const [listData, setListData] = useState([])
+  const [showAddBtn, setShowAddBtn] = useState(true)
   const history = useHistory()
   useEffect(() => {
     getDetail()
-    getComparePrice()
+    getComparePrice($common.getUrlQuery('reid'))
   }, [])
 
   // 请求详情接口
@@ -28,16 +29,17 @@ const Detail = () => {
     }).then(res => {
       setDataSource(res.data ? res.data : {})
       setData(res.data.relations ? res.data.relations : [])
+      setShowAddBtn(res.data.dresser_is_del)
     }).catch(err => {
       Toast.fail(err.error_msg, 1);
     })
   }
 
   // 获取比价列表
-  const getComparePrice = () => {
+  const getComparePrice = (reid) => {
     API.getComparePrice({
       stid: $common.getUrlQuery('stid'),
-      reid: $common.getUrlQuery('reid'),
+      reid: reid,
       page: 1
     }).then(res => {
       setSiteData(res.data.comparelist_data ? res.data.comparelist_data : [])
@@ -77,8 +79,9 @@ const Detail = () => {
     history.go(-1)
   }
 
-  const choiceItem = (id) => {
+  const choiceItem = (id, data) => {
     setSelectActive(id)
+    getComparePrice(data.relation_id)
   }
 
   const choiceSite = (index, value) => {
@@ -103,7 +106,7 @@ const Detail = () => {
         <div className='detail-list'>
           {
             data.map((item, i) => {
-              return <div className={ selectActive === i ? 'detail-list-item item-active' : 'detail-list-item'} key={i} onClick={choiceItem.bind(this, i)}>
+              return <div className={ selectActive === i ? 'detail-list-item item-active' : 'detail-list-item'} key={i} onClick={choiceItem.bind(this, i, item)}>
                 <div className='detail-list-img-wrapper'>
                   <img className='detail-list-item-img' src={item.pic} alt='' />
                 </div>
@@ -131,8 +134,11 @@ const Detail = () => {
       <List listData={listData}></List>
     </div>
     <div className='detail-bottom'>
-      <span onClick={addDressingTable}>加入梳妆台</span>
-      <span onClick={removeDressingTable}>从梳妆台移除</span>
+      {
+        !showAddBtn ? <span onClick={addDressingTable}>加入梳妆台</span> : <span onClick={removeDressingTable}>从梳妆台移除</span>
+      }
+      {/* <span onClick={addDressingTable}>加入梳妆台</span>
+      <span onClick={removeDressingTable}>从梳妆台移除</span> */}
     </div>
   </div>
 }
