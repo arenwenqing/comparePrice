@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.5f5cf6b7.chunk.css",
-    "main.js": "/static/js/main.28d31e2a.chunk.js",
-    "runtime-main.js": "/static/js/runtime-main.7cfb14c3.js",
-    "static/css/2.20c17ff5.chunk.css": "/static/css/2.20c17ff5.chunk.css",
-    "static/js/2.0916d49b.chunk.js": "/static/js/2.0916d49b.chunk.js",
-    "static/js/3.54e25179.chunk.js": "/static/js/3.54e25179.chunk.js",
+    "main.css": "/static/css/main.308df80c.chunk.css",
+    "main.js": "/static/js/main.430faf84.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.35a982de.js",
+    "static/css/2.e1917365.chunk.css": "/static/css/2.e1917365.chunk.css",
+    "static/js/2.c58938cc.chunk.js": "/static/js/2.c58938cc.chunk.js",
+    "static/js/3.9fa199ab.chunk.js": "/static/js/3.9fa199ab.chunk.js",
     "index.html": "/index.html",
-    "static/js/2.0916d49b.chunk.js.LICENSE.txt": "/static/js/2.0916d49b.chunk.js.LICENSE.txt",
+    "static/js/2.c58938cc.chunk.js.LICENSE.txt": "/static/js/2.c58938cc.chunk.js.LICENSE.txt",
     "static/media/index.less": "/static/media/placeholer-collection.80182dc5.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7cfb14c3.js",
-    "static/css/2.20c17ff5.chunk.css",
-    "static/js/2.0916d49b.chunk.js",
-    "static/css/main.5f5cf6b7.chunk.css",
-    "static/js/main.28d31e2a.chunk.js"
+    "static/js/runtime-main.35a982de.js",
+    "static/css/2.e1917365.chunk.css",
+    "static/js/2.c58938cc.chunk.js",
+    "static/css/main.308df80c.chunk.css",
+    "static/js/main.430faf84.chunk.js"
   ]
 }

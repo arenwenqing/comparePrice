@@ -33,7 +33,7 @@
   }
   .detail-list-item-name {
     display: inline-block;
-    width: 240px;
+    width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -42,17 +42,36 @@
     font-weight: 500;
     color: #080808;
     line-height: 16px;
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 31px;
-      height: 16px;
-      background: url('../../../../assets/tm.png') no-repeat;
-      background-position: center;
-      background-size: contain;
-      margin-right: 5px;
-      vertical-align: middle;
-    }
+  }
+  .tian-mao {
+    display: inline-block;
+    width: 31px;
+    height: 16px;
+    background: url('../../../../assets/tm.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .tao-bao {
+    display: inline-block;
+    width: 31px;
+    height: 16px;
+    background: url('../../../../assets/tb.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .jing-dong {
+    display: inline-block;
+    width: 31px;
+    height: 16px;
+    background: url('../../../../assets/jd.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 5px;
+    vertical-align: middle;
   }
   .detail-list-item-pirce-text {
     position: relative;
@@ -70,6 +89,7 @@
     padding: 0px 15px;
     left: 41px;
     line-height: 32px;
+    flex: 1;
   }
   .detail-list-item-rate {
     display: flex;

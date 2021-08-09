@@ -15,7 +15,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
   }
   .login-top-icon {
     position: absolute;
@@ -49,6 +49,18 @@
   .login-list-message {
     margin-top: 10px;
   }
+  .login-yanzheng-wrapper {
+    position: relative;
+    .login-yanzheng-send {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 12px;
+      font-family: PingFang;
+      font-weight: 400;
+      color: #FF5047;
+    }
+  }
   .login-submit-btn {
     width: 275px;
     height: 35px;
@@ -63,4 +75,13 @@
     line-height: 35px;
     margin: 26px auto 0;
   }
+  .am-list-body::before {
+    background-color: #fff !important;
+  }
+  .am-list-line::after {
+    background-color: #E5E5E5 !important;
+  }
+}
+.hide {
+  display: none !important;
 }

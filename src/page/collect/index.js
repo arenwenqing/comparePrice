@@ -1,15 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import NoCollect from './components/noCollect'
 import HaveCollect from '../components/list'
+import { useHistory } from 'react-router-dom'
 import { Toast } from 'antd-mobile';
+import Login from '../login'
 import API from './apis'
 import './index.less'
 
 const Collect = () => {
   const [dataList, setDataList] = useState([])
+  const [showLogin, setShowLogin] = useState(false)
+  // const [flag, setFlag] = useState(false)
+  const loginRef = useRef()
+  const history = useHistory()
   useEffect(() => {
+    getUser()
     getDresserTable()
   }, [])
+
+  // 校验用户
+  const getUser = () => {
+    API.getUser({}).then(res => {
+      console.log(res)
+    }).catch(err => {
+      if (err.code === 1005) {
+        setShowLogin(true)
+      }
+      Toast.fail(err.error_msg, 1);
+    })
+  }
 
   // 获取化妆台
   const getDresserTable = () => {
@@ -34,16 +53,30 @@ const Collect = () => {
     })
   }
 
+  // 获取焦点
+  const focusFun = () => {
+    history.push({
+      pathname: 'search'
+    })
+  }
+
+  const login = () => {
+    loginRef.current.show()
+  }
+
   return <div className='collect-wrapper'>
+    <Login ref={loginRef}></Login>
     <div className='collect-top'>
       <div className='collect-top-vip-wrapper'>
         <span className='collect-vip-icon'></span>
-        <span className='collect-vip-num'>135****6666</span>
+        {
+          showLogin ? <span className='collect-vip-num' onClick={login}>请登录</span> : <span className='collect-vip-num'>135****6666</span>
+        }
       </div>
       <div className='collect-title'>买化妆品，先找苏大侠比价</div>
       <div className='collect-search-wrapper'>
         <span className='collect-search-icon'></span>
-        <input className='collect-search-input' type="text" placeholder='搜索你想买的化妆品，查看全网底价'></input>
+        <input className='collect-search-input' type="text" placeholder='搜索你想买的化妆品，查看全网底价' onFocus={focusFun}></input>
       </div>
     </div>
     <div className='collect-content'>

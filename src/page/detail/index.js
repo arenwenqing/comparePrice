@@ -6,6 +6,7 @@ import './index.less'
 import API from './apis'
 import $common from '@/utils'
 
+let allData = []
 const Detail = () => {
   const [data, setData] = useState([])
   const [selectActive, setSelectActive] = useState(0)
@@ -40,7 +41,8 @@ const Detail = () => {
       page: 1
     }).then(res => {
       setSiteData(res.data.comparelist_data ? res.data.comparelist_data : [])
-      setListData(res.data.product_group_list ? res.data.product_group_list : [])
+      allData = res.data.product_group_list ? res.data.product_group_list : []
+      setListData(res.data.product_group_list ? res.data.product_group_list.flat(Infinity) : [])
     }).catch(err => {
       Toast.fail(err.error_msg, 1);
     })
@@ -81,7 +83,13 @@ const Detail = () => {
 
   const choiceSite = (index, value) => {
     setActiveSite(index)
-    console.log(value)
+    let arr = allData.flat(Infinity)
+    if (value !== '') {
+      let filterArr = arr.filter(item => item.platform_id === value * 1)
+      setListData(filterArr)
+    } else {
+      setListData(arr)
+    }
   }
 
   return <div className='detail-wrapper'>

@@ -9,7 +9,7 @@ import API from './apis'
 let currentInput = ''
 const Search = () => {
   const [showSearchResult, setShowSearchResult] = useState([])
-  const [flag, setFlag] = useState(false)
+  // const [flag, setFlag] = useState(false)
   const [searchValue, setSearchValue] = useState(undefined)
   const inputChange = (e) => {
     currentInput = e.target.value.trim()

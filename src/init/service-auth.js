@@ -3,7 +3,7 @@ import axiosService from 'axios-service'
 
 const setTicketToHeader = config => {
   const { headers } = config;
-  headers.Authorization = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6MTMwNTEwMjg5MjgsImV4cCI6MTYyNzkxOTQ2NX0.qjNVH0B7sUg8O5thSCossGU24ievYUNW5Xc_BFx2hZc'
+  headers.Authorization = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6MTMwNTEwMjg5MjgsImV4cCI6MTYzMDU1MTAxMH0.1ayTtHgb77Tt_BMdjODkv2-R4189xcjLiYMD5zZLyyM'
 };
 
 const setTicketToParams = config => {
